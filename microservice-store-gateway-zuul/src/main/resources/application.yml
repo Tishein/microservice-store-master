@@ -1,0 +1,20 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: microservice-store-gateway-zuul
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+#zuul:
+#  prefix: /tstore
+#  strip-prefix: false
+#logging:
+#  level:
+#    com.netflix: debug
