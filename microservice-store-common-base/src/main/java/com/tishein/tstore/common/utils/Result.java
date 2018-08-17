@@ -19,8 +19,7 @@ public class Result<T extends Object> implements Serializable {
 
     private T data;
 
-    public Result() {
-    }
+    public Result() { }
 
     public Result(Integer code, String massage, T data) {
         this.code = code;
