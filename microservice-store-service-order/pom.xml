@@ -21,7 +21,7 @@
 
         <dependency>
             <groupId>com.tishein.tstrore</groupId>
-            <artifactId>microservice-store-member-api</artifactId>
+            <artifactId>microservice-store-service-member-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
