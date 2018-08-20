@@ -6,6 +6,8 @@
 	<groupId>com.tishein.tstrore</groupId>
 	<artifactId>microservice-store-master</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
 
 	<name>microservice-store-master</name>
 
@@ -71,15 +73,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
-
 </project>
