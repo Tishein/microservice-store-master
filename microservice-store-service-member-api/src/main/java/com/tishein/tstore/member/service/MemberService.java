@@ -1,6 +1,6 @@
 package com.tishein.tstore.member.service;
 
-import com.tishein.tstore.common.service.BaseService;
+import com.tishein.tstore.common.base.service.BaseService;
 import com.tishein.tstore.domain.Member;
 import com.tishein.tstore.member.service.hystrix.MemberServiceHystrix;
 import org.springframework.cloud.openfeign.FeignClient;

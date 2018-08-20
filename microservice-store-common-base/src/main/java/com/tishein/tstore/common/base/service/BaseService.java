@@ -1,7 +1,7 @@
-package com.tishein.tstore.common.service;
+package com.tishein.tstore.common.base.service;
 
 import com.github.pagehelper.PageInfo;
-import com.tishein.tstore.domain.BaseDomain;
+import com.tishein.tstore.common.base.domain.BaseDomain;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

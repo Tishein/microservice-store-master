@@ -1,10 +1,10 @@
-package com.tishein.tstore.common.service.impl;
+package com.tishein.tstore.common.base.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.tishein.tstore.common.mapper.BaseMapper;
-import com.tishein.tstore.common.service.BaseService;
-import com.tishein.tstore.domain.BaseDomain;
+import com.tishein.tstore.common.base.mapper.BaseMapper;
+import com.tishein.tstore.common.base.service.BaseService;
+import com.tishein.tstore.common.base.domain.BaseDomain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;

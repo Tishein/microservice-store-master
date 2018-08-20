@@ -1,6 +1,6 @@
 package com.tishein.tstore.member.mapper;
 
-import com.tishein.tstore.common.mapper.BaseMapper;
+import com.tishein.tstore.common.base.mapper.BaseMapper;
 import com.tishein.tstore.domain.Member;
 import org.apache.ibatis.annotations.Mapper;
 

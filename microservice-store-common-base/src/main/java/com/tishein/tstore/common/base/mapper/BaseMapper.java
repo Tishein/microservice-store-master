@@ -1,6 +1,6 @@
-package com.tishein.tstore.common.mapper;
+package com.tishein.tstore.common.base.mapper;
 
-import com.tishein.tstore.domain.BaseDomain;
+import com.tishein.tstore.common.base.domain.BaseDomain;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-package com.tishein.tstore.common.service.hystrix;
+package com.tishein.tstore.common.base.service.hystrix;
 
 import com.github.pagehelper.PageInfo;
-import com.tishein.tstore.common.service.BaseService;
-import com.tishein.tstore.domain.BaseDomain;
+import com.tishein.tstore.common.base.service.BaseService;
+import com.tishein.tstore.common.base.domain.BaseDomain;
 
 import java.util.List;
 

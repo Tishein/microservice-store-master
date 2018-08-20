@@ -1,6 +1,7 @@
 package com.tishein.tstore.domain;
 
 
+import com.tishein.tstore.common.base.domain.BaseDomain;
 import lombok.Data;
 
 import java.util.Date;

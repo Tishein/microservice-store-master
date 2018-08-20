@@ -1,6 +1,6 @@
 package com.tishein.tstore.member.service.impl;
 
-import com.tishein.tstore.common.service.impl.BaseServiceImpl;
+import com.tishein.tstore.common.base.service.impl.BaseServiceImpl;
 import com.tishein.tstore.domain.Member;
 import com.tishein.tstore.member.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;

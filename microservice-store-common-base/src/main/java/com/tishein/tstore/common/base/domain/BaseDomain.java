@@ -1,4 +1,4 @@
-package com.tishein.tstore.domain;
+package com.tishein.tstore.common.base.domain;
 
 import lombok.Data;
 
