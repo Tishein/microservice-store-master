@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 import com.tishein.tstore.common.base.service.hystrix.BaseServiceHystrix;
 
 @Component
-public class MemberServiceHystrix extends BaseServiceHystrix<Member> implements MemberService {
+public class MemberServiceHystrix extends BaseServiceHystrix<Member, String> implements MemberService {
 
 }

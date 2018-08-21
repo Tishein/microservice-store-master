@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @Date 2018/8/17 0017 17:39
  */
 @Data
-public class Result<T extends Object> implements Serializable {
+public class Result<T> implements Serializable {
 
     private Integer code;
 

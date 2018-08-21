@@ -13,7 +13,7 @@ import java.util.Date;
  * @Date 2018/8/16 0016 13:40
  */
 @Data
-public class Member extends BaseDomain {
+public class Member extends BaseDomain<String> {
 
     private String nickname;
 

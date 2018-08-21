@@ -15,6 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/member")
-public class MemberServiceImpl extends BaseServiceImpl<Member> implements MemberService {
+public class MemberServiceImpl extends BaseServiceImpl<Member, String> implements MemberService {
 
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/order")
-public class OrderServiceImpl  {
+public class OrderServiceImpl {
 
     @Autowired
     private MemberService memberService;
@@ -25,7 +25,7 @@ public class OrderServiceImpl  {
 
     @GetMapping("/member/{id}")
     public Result<Member> getMember(@PathVariable("id") String id) {
-        return Result.success(memberService.get(id));
+        return memberService.get(id);
     }
 
 }

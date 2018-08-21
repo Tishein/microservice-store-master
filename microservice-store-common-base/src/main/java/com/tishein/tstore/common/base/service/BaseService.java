@@ -2,6 +2,7 @@ package com.tishein.tstore.common.base.service;
 
 import com.github.pagehelper.PageInfo;
 import com.tishein.tstore.common.base.domain.BaseDomain;
+import com.tishein.tstore.common.utils.Result;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @Description 基础业务逻辑处理层
  * @Date 17:13 2018/8/15 0015
  **/
-public interface BaseService<T extends BaseDomain>  {
+public interface BaseService<T extends BaseDomain, ID>  {
 
     /**
      * @Author Stishein
@@ -21,7 +22,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return java.util.List<com.tishein.tstore.domain.BaseDomain>
      **/
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    List<T> list(@ModelAttribute T domain);
+    Result<List<T>> list(@ModelAttribute T domain);
 
     /**
      * @Author Stishein
@@ -31,7 +32,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return com.github.pagehelper.PageInfo<T>
      **/
     @RequestMapping(value = "/list/{pageNum}/{pageSize}", method = RequestMethod.GET)
-    PageInfo<T> list(
+    Result<PageInfo<T>> list(
             @ModelAttribute           T       domain,
             @PathVariable("pageNum")  Integer pageNum,
             @PathVariable("pageSize") Integer pageSize
@@ -45,7 +46,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return com.tishein.tstore.domain.BaseDomain
      **/
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    T get(@PathVariable("id") String id);
+    Result<T> get(@PathVariable("id") ID id);
     
     /**
      * @Author Stishein
@@ -55,7 +56,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "", method = RequestMethod.POST)
-    int insert(@RequestBody T domain);
+    Result<T> insert(@RequestBody T domain);
 
     /**
      * @Author Stishein
@@ -65,7 +66,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "", method = RequestMethod.PUT)
-    int update(T domain);
+    Result<T> update(T domain);
 
     /**
      * @Author Stishein
@@ -75,7 +76,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    int delete(@PathVariable("id") String id);
+    Result<T> delete(@PathVariable("id") ID id);
 
     /**
      * @Author Stishein
@@ -85,7 +86,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "/{id}/logic", method = RequestMethod.DELETE)
-    int deleteLogic(@PathVariable("id") String id);
+    Result<T> deleteLogic(@PathVariable("id") ID id);
 
     /**
      * @Author Stishein
@@ -95,7 +96,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "/batch", method = RequestMethod.POST)
-    int insertBatch(@RequestBody List<T> domains);
+    Result<T> insertBatch(@RequestBody List<T> domains);
     
     /**
      * @Author Stishein
@@ -105,7 +106,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "/batch", method = RequestMethod.PUT)
-    int updateBatch(@RequestBody List<T> domains);
+    Result<T> updateBatch(@RequestBody List<T> domains);
 
 
     /**
@@ -116,7 +117,7 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "/batch", method = RequestMethod.DELETE)
-    int deleteBatch(@RequestBody List<T> domains);
+    Result<T> deleteBatch(@RequestBody List<T> domains);
 
     /**
      * @Author Stishein
@@ -126,5 +127,5 @@ public interface BaseService<T extends BaseDomain>  {
      * @return int
      **/
     @RequestMapping(value = "/batch/logic", method = RequestMethod.DELETE)
-    int deleteLogicBatch(List<T> domains);
+    Result<T> deleteLogicBatch(List<T> domains);
 }

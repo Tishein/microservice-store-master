@@ -1,5 +1,6 @@
 package com.tishein.tstore.fallback;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class ZuulFallback implements FallbackProvider {
@@ -43,7 +45,10 @@ public class ZuulFallback implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream(("fallback:" + route).getBytes());
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("route", route);
+
+                return new ByteArrayInputStream(jsonObject.toJSONString().getBytes(StandardCharsets.UTF_8));
             }
 
             @Override

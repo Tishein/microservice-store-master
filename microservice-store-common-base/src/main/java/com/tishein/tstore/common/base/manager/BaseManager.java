@@ -1,30 +1,25 @@
-package com.tishein.tstore.common.base.service.impl;
+package com.tishein.tstore.common.base.manager;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tishein.tstore.common.base.domain.BaseDomain;
-import com.tishein.tstore.common.base.manager.BaseManager;
-import com.tishein.tstore.common.base.service.BaseService;
-import com.tishein.tstore.common.utils.Result;
-import lombok.extern.slf4j.Slf4j;
+import com.tishein.tstore.common.base.mapper.BaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * @ClassName BaseServiceImpl
- * @Description 基础业务逻辑处理层实现
- * @Author Stishein
- * @Date 2018/8/15 0015 17:57
+ * @ClassName BaseManager
+ * @Description 基础管理层
+ * @Author Administrator
+ * @Date 2018/8/20 0020 15:15
  */
-@Slf4j
-public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T, ID> {
+public class BaseManager<T extends BaseDomain, ID> {
 
     @Autowired
-    protected BaseManager<T, ID> manager;
-
+    protected BaseMapper<T> mapper;
 
     /**
      * @return java.util.List<com.tishein.tstore.domain.BaseDomain>
@@ -33,10 +28,9 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:45 2018/8/15 0015
      * @Param [domain]
      **/
-    @Override
-    public Result<List<T>> list(T domain) {
+    public List<T> list(T domain) {
 
-        return Result.success(manager.list(domain));
+        return mapper.list(domain);
     }
 
     /**
@@ -46,15 +40,10 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 9:57 2018/8/16 0016
      * @Param [domain, pageNum, pageSize]
      **/
-    @Override
-    public Result<PageInfo<T>> list(T domain,
-            @PathVariable("pageNum")    Integer pageNum,
-            @PathVariable("pageSize")   Integer pageSize
-    ) {
-
-        PageInfo<T> pageInfo = manager.list(domain, pageNum, pageSize);
-
-        return Result.success(pageInfo);
+    public PageInfo<T> list(T domain, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<T> domains = mapper.list(domain);
+        return new PageInfo<>(domains);
     }
 
     /**
@@ -64,10 +53,8 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:26 2018/8/15 0015
      * @Param [domain]
      **/
-    @Override
-    public Result<T> get(@PathVariable("id") ID id) {
-
-        return Result.success(manager.get(id));
+    public T get(ID id) {
+        return mapper.get(new BaseDomain(id));
     }
 
     /**
@@ -77,13 +64,9 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:12 2018/8/15 0015
      * @Param [domain]
      **/
-    @Override
-    public Result<T> insert(@RequestBody T domain) {
-
+    public int insert(T domain) {
         domain.setCreateDate(new Date());
-        manager.insert(domain);
-
-        return Result.success();
+        return mapper.insert(domain);
     }
 
     /**
@@ -93,13 +76,21 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:15 2018/8/15 0015
      * @Param [domain]
      **/
-    @Override
-    public Result<T> update(@RequestBody T domain) {
-
+    public int update(T domain) {
         domain.setModifyDate(new Date());
-        manager.update(domain);
+        return mapper.update(domain);
+    }
 
-        return Result.success();
+    /**
+     * @return int
+     * @Author Stishein
+     * @Description 逻辑删除数据
+     * @Date 17:25 2018/8/15 0015
+     * @Param [domain]
+     *
+     * @param id*/
+    public int delete(ID id) {
+        return mapper.delete(new BaseDomain(id));
     }
 
     /**
@@ -109,27 +100,8 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:25 2018/8/15 0015
      * @Param [domain]
      **/
-    @Override
-    public Result<T> delete(@PathVariable("id") ID id) {
-
-        manager.delete(id);
-
-        return Result.success();
-    }
-
-    /**
-     * @return int
-     * @Author Stishein
-     * @Description 逻辑删除数据
-     * @Date 17:25 2018/8/15 0015
-     * @Param [domain]
-     **/
-    @Override
-    public Result<T> deleteLogic(@PathVariable("id") ID id) {
-
-        manager.deleteLogic(id);
-
-        return Result.success();
+    public int deleteLogic(ID id) {
+        return mapper.deleteLogic(new BaseDomain<>(id));
     }
 
     /**
@@ -139,14 +111,10 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:32 2018/8/15 0015
      * @Param [list]
      **/
-    @Override
-    public Result<T> insertBatch(@RequestBody List<T> domains) {
-
+    public int insertBatch(List<T> domains) {
         Date now = new Date();
         domains.forEach((domain) -> domain.setCreateDate(now));
-        manager.insertBatch(domains);
-
-        return Result.success();
+        return mapper.insertBatch(domains);
     }
 
     /**
@@ -156,14 +124,10 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:33 2018/8/15 0015
      * @Param [domains]
      **/
-    @Override
-    public Result<T> updateBatch(@RequestBody List<T> domains) {
-
+    public int updateBatch(@RequestBody List<T> domains) {
         Date now = new Date();
         domains.forEach((domain) -> domain.setModifyDate(now));
-        manager.updateBatch(domains);
-
-        return Result.success();
+        return mapper.updateBatch(domains);
     }
 
     /**
@@ -173,12 +137,8 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:42 2018/8/15 0015
      * @Param [domains]
      **/
-    @Override
-    public Result<T> deleteBatch(@RequestBody List<T> domains) {
-
-        manager.deleteBatch(domains);
-
-        return Result.success();
+    public int deleteBatch(List<T> domains) {
+        return mapper.deleteBatch(domains);
     }
 
     /**
@@ -188,11 +148,7 @@ public class BaseServiceImpl<T extends BaseDomain, ID> implements BaseService<T,
      * @Date 17:42 2018/8/15 0015
      * @Param [domains]
      **/
-    @Override
-    public Result<T> deleteLogicBatch(@RequestBody List<T> domains) {
-
-        manager.deleteLogicBatch(domains);
-
-        return Result.success();
+    public int deleteLogicBatch(List<T> domains) {
+        return mapper.deleteLogicBatch(domains);
     }
 }
